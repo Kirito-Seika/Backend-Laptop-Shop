@@ -1,13 +1,13 @@
-package vn.hoidanit.laptopshop;
+package vn.minhduc.laptopshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LaptopshopApplication {
+public class LaptopShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LaptopshopApplication.class, args);
+		SpringApplication.run(LaptopShopApplication.class, args);
 	}
 
 }
