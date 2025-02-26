@@ -23,12 +23,16 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> arrayUsers = this.userService.getAllUsersByEmail("admin@gmail.com");
         System.out.println(arrayUsers);
-        model.addAttribute("test", "test");
         return "hello";
     }
 
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
+        return "admin/user/layout";
+    }
+
+    @RequestMapping("/admin/user/create")
+    public String getCreateUserPage(Model model) {
         model.addAttribute("createUser", new User());
         return "admin/user/create";
     }
