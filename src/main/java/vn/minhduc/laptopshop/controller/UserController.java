@@ -3,6 +3,7 @@ package vn.minhduc.laptopshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import vn.minhduc.laptopshop.domain.User;
@@ -31,6 +32,12 @@ public class UserController {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("listUsers", users);
         return "admin/user/layout";
+    }
+
+    @RequestMapping("/admin/user/{id}")
+    public String getUserDetailPage(Model model, @PathVariable long id) {
+        model.addAttribute("userId", id);
+        return "admin/user/view";
     }
 
     @RequestMapping("/admin/user/create")
