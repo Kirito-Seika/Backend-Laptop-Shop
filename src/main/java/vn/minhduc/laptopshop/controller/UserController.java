@@ -21,6 +21,13 @@ public class UserController {
         model.addAttribute("test", test);
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        String test = this.userService.handleHomePage();
+        model.addAttribute("test", test);
+        return "admin/user/create";
+    }
 }
 
 //@RestController
