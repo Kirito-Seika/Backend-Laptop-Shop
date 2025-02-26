@@ -2,10 +2,7 @@ package vn.minhduc.laptopshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import vn.minhduc.laptopshop.domain.User;
 import vn.minhduc.laptopshop.repository.UserRepository;
 import vn.minhduc.laptopshop.service.UserService;
@@ -55,9 +52,23 @@ public class UserController {
     }
 
     @RequestMapping("/admin/user/update/{id}") // GET
-    public String getUpdateUserPage(Model model) {
-        model.addAttribute("updateUser", new User());
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("updateUser", currentUser);
         return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("updateUser") User user) {
+        User currentUser = this.userService.getUserById(user.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(user.getAddress());
+            currentUser.setFullName(user.getFullName());
+            currentUser.setPhone(user.getPhone());
+
+            this.userService.handleSaveUser(user);
+        }
+        return "redirect:/admin/user";
     }
 }
 
