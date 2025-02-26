@@ -9,6 +9,8 @@ import vn.minhduc.laptopshop.domain.User;
 import vn.minhduc.laptopshop.repository.UserRepository;
 import vn.minhduc.laptopshop.service.UserService;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     private final UserService userService;
@@ -19,8 +21,9 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handleHomePage();
-        model.addAttribute("test", test);
+        List<User> arrayUsers = this.userService.getAllUsersByEmail("admin@gmail.com");
+        System.out.println(arrayUsers);
+        model.addAttribute("test", "test");
         return "hello";
     }
 

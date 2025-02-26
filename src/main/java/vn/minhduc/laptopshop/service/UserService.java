@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import vn.minhduc.laptopshop.domain.User;
 import vn.minhduc.laptopshop.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -14,6 +16,14 @@ public class UserService {
 
     public String handleHomePage() {
         return "Hello World";
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    public List<User> getAllUsersByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 
     public User handleSaveUser(User user) {
