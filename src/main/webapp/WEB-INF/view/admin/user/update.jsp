@@ -36,11 +36,11 @@
 
                 <div class="mb-3">
                     <label class="form-label">Email:</label>
-                    <form:input type="email" class="form-control" path="email" />
+                    <form:input type="email" class="form-control" path="email" disabled="true"/>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Phon:</label>
+                    <label class="form-label">Phone:</label>
                     <form:input type="text" class="form-control" path="phone" />
                 </div>
                 <div class="mb-3">
