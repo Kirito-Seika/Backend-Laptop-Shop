@@ -1,10 +1,9 @@
-package vn.minhduc.laptopshop.controller;
+package vn.minhduc.laptopshop.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.minhduc.laptopshop.domain.User;
-import vn.minhduc.laptopshop.repository.UserRepository;
 import vn.minhduc.laptopshop.service.UserService;
 
 import java.util.List;
