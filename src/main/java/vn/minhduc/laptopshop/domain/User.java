@@ -2,6 +2,8 @@ package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,6 +16,14 @@ public class User {
     private String address;
     private String phone;
     private String avatar;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
 
     public long getId() {
         return id;
@@ -74,6 +84,6 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar +"]";
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 }

@@ -11,6 +11,10 @@ public class Order {
 
     private double totalPrice;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public long getId() {
         return id;
     }
