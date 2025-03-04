@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Hero Start -->
 <div class="container-fluid py-5 mb-5 hero-header">
     <div class="container py-5">
