@@ -1,7 +1,9 @@
 package vn.minhduc.laptopshop.service;
 
 import org.springframework.stereotype.Service;
+import vn.minhduc.laptopshop.domain.Role;
 import vn.minhduc.laptopshop.domain.User;
+import vn.minhduc.laptopshop.repository.RoleRepository;
 import vn.minhduc.laptopshop.repository.UserRepository;
 
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public String handleHomePage() {
@@ -36,5 +40,9 @@ public class UserService {
 
     public void deleteUserById(long id) {
         this.userRepository.deleteById(id);
+    }
+
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
     }
 }
