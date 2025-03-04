@@ -12,17 +12,17 @@
     <meta name="author" content="Kirito Nguyễn"/>
     <title>Create User</title>
     <link href="/style/styles.css" rel="stylesheet"/>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
-                            const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
-                        });
-                    });
-                </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            const avatarFile = $("#avatarFile");
+            avatarFile.change(function (e) {
+                const imgURL = URL.createObjectURL(e.target.files[0]);
+                $("#avatarPreview").attr("src", imgURL);
+                $("#avatarPreview").css({"display": "block"});
+            });
+        });
+    </script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
-                                         id="avatarPreview" src=""/>
+                                         id="avatarPreview"/>
                                 </div>
                                 <div class="col-12 mb-5">
                                     <button type="submit" class="btn btn-primary">Create</button>
