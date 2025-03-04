@@ -6,25 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.minhduc.laptopshop.domain.User;
+import vn.minhduc.laptopshop.service.UploadService;
 import vn.minhduc.laptopshop.service.UserService;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class UserController {
     private final UserService userService;
-    private final ServletContext servletContext;
+    private final UploadService uploadService;
 
     public UserController(
             UserService userService,
-            ServletContext servletContext
+            UploadService uploadService
     ) {
         this.userService = userService;
-        this.servletContext = servletContext;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -57,27 +54,8 @@ public class UserController {
 
     @PostMapping("/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("createUser") User user, @RequestParam("file") MultipartFile file) {
-        try {
-            byte[] bytes = file.getBytes();
-            String rootPath = this.servletContext.getRealPath("/resources/image");
-
-            File dir = new File(rootPath + File.separator + "avatar");
-            if (!dir.exists())
-                dir.mkdirs();
-
-            // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath() + File.separator +
-                    +System.currentTimeMillis() + "-" + file.getOriginalFilename());
-
-            BufferedOutputStream stream = new BufferedOutputStream(
-                    new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        this.userService.handleSaveUser(user);
+        String avatar = this.uploadService.handleUploadFile(file, "avatar");
+//        this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
