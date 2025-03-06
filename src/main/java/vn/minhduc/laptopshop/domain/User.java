@@ -2,10 +2,10 @@ package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import vn.minhduc.laptopshop.validator.annotation.ValidEmail;
-import vn.minhduc.laptopshop.validator.annotation.ValidName;
-import vn.minhduc.laptopshop.validator.annotation.ValidPassword;
-import vn.minhduc.laptopshop.validator.annotation.ValidPhone;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidName;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidPassword;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
 
 import java.util.List;
 

@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.minhduc.laptopshop.domain.User;
@@ -65,11 +64,6 @@ public class UserController {
             BindingResult createUserBindingResult,
             @RequestParam("file") MultipartFile file
     ) {
-        List<FieldError> errors = createUserBindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
-        //validate
         if(createUserBindingResult.hasErrors()) {
             return "admin/user/create";
         }
@@ -78,7 +72,7 @@ public class UserController {
         user.setAvatar(avatar);
         user.setPassword(hashPassword);
         user.setRole(this.userService.getRoleByName(user.getRole().getName()));
-        this.userService.handleSaveUser(user);
+        this.userService.createUser(user);
         return "redirect:/admin/user";
     }
 
@@ -97,7 +91,7 @@ public class UserController {
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
 
-            this.userService.handleSaveUser(currentUser);
+            this.userService.createUser(currentUser);
         }
         return "redirect:/admin/user";
     }

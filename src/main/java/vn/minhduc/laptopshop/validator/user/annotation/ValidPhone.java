@@ -1,8 +1,8 @@
-package vn.minhduc.laptopshop.validator.annotation;
+package vn.minhduc.laptopshop.validator.user.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import vn.minhduc.laptopshop.validator.validate.PhoneValidator;
+import vn.minhduc.laptopshop.validator.user.validate.PhoneValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

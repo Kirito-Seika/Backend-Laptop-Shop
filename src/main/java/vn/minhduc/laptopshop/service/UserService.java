@@ -30,7 +30,7 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    public User handleSaveUser(User user) {
+    public User createUser(User user) {
         return this.userRepository.save(user);
     }
 

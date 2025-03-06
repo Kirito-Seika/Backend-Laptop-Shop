@@ -1,8 +1,8 @@
-package vn.minhduc.laptopshop.validator.validate;
+package vn.minhduc.laptopshop.validator.user.validate;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import vn.minhduc.laptopshop.validator.annotation.ValidPhone;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
 
 public class PhoneValidator implements ConstraintValidator<ValidPhone, String> {
 
