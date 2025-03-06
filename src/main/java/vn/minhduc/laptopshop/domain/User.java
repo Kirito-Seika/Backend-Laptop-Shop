@@ -1,9 +1,11 @@
 package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import vn.minhduc.laptopshop.validator.annotation.ValidEmail;
+import vn.minhduc.laptopshop.validator.annotation.ValidName;
+import vn.minhduc.laptopshop.validator.annotation.ValidPassword;
+import vn.minhduc.laptopshop.validator.annotation.ValidPhone;
 
 import java.util.List;
 
@@ -14,24 +16,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Email
+    @ValidEmail
     private String email;
 
-    @NotNull
-    @Size(min = 6, max = 15)
+    @ValidPassword
     private String password;
 
-    @NotNull
+    @ValidName
     private String fullName;
 
-    @NotNull
+    @NotEmpty(message = "Address không được để trống")
     private String address;
 
-    @NotNull
+    @ValidPhone
     private String phone;
 
-    @NotNull
     private String avatar;
 
     @ManyToOne
