@@ -1,6 +1,10 @@
 package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import vn.minhduc.laptopshop.validator.product.annotation.ValidName;
+import vn.minhduc.laptopshop.validator.product.annotation.ValidPrice;
+import vn.minhduc.laptopshop.validator.product.annotation.ValidQuantity;
 
 @Entity
 @Table(name = "products")
@@ -9,12 +13,23 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ValidName
     private String name;
+
+    @ValidPrice
     private double price;
+
     private String image;
+
+    @NotEmpty(message = "Mô tả chi tiết về sản phầm không được để trống")
     private String detailDesc;
+
+    @NotEmpty(message = "Mô tả ngắn về sản phầm không được để trống")
     private String shortDesc;
+
+    @ValidQuantity
     private long quantity;
+
     private long sold;
     private String factory;
     private String target;
