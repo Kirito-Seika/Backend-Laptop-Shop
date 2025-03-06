@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-12 mx-auto">
                             <div class="d-flex justify-content-between">
-                                <h3>Table products</h3>
+                                <h3>Table Products</h3>
                                 <a href="/admin/product/create" class="btn btn-primary">Create a product</a>
                             </div>
 
@@ -78,7 +78,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-<script src="javascript/scripts.js"></script>
+<script src="/javascript/scripts.js"></script>
 </body>
 
 </html>

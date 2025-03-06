@@ -5,6 +5,7 @@ import vn.minhduc.laptopshop.domain.Product;
 import vn.minhduc.laptopshop.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -20,6 +21,14 @@ public class ProductService {
 
     public Product createProduct(Product product) {
         return this.productRepository.save(product);
+    }
+
+    public Optional<Product> getProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
     }
 
 }
