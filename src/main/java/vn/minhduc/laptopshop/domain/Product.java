@@ -22,6 +22,7 @@ public class Product {
     private String image;
 
     @NotEmpty(message = "Mô tả chi tiết về sản phầm không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotEmpty(message = "Mô tả ngắn về sản phầm không được để trống")
