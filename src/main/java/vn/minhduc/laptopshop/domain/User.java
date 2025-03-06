@@ -1,6 +1,9 @@
 package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -10,11 +13,25 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
+    @Size(min = 6, max = 15)
     private String password;
+
+    @NotNull
     private String fullName;
+
+    @NotNull
     private String address;
+
+    @NotNull
     private String phone;
+
+    @NotNull
     private String avatar;
 
     @ManyToOne

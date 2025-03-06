@@ -1,8 +1,11 @@
 package vn.minhduc.laptopshop.controller.admin;
 
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.minhduc.laptopshop.domain.User;
@@ -56,7 +59,16 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("createUser") User user, @RequestParam("file") MultipartFile file) {
+    public String createUserPage(
+            Model model,
+            @ModelAttribute("createUser") @Valid User user,
+            BindingResult bindingResult,
+            @RequestParam("file") MultipartFile file
+    ) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+        }
         String avatar = this.uploadService.handleUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
         user.setAvatar(avatar);
