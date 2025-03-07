@@ -1,13 +1,10 @@
 package vn.minhduc.laptopshop.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import vn.minhduc.laptopshop.validator.register.annotation.ValidFirstName;
-import vn.minhduc.laptopshop.validator.register.annotation.ValidLastName;
-import vn.minhduc.laptopshop.validator.register.annotation.ValidConfirmPassword;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidPassword;
+import vn.minhduc.laptopshop.validator.register.annotation.*;
+import vn.minhduc.laptopshop.validator.user.annotation.*;
 
+@ValidCheckMail
 @ValidConfirmPassword
 public class RegisterDTO {
     @ValidFirstName

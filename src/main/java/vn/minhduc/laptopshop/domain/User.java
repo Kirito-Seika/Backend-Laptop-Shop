@@ -2,13 +2,11 @@ package vn.minhduc.laptopshop.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidName;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidPassword;
-import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
+import vn.minhduc.laptopshop.validator.user.annotation.*;
 
 import java.util.List;
 
+@ValidCheck
 @Entity
 @Table(name = "users")
 public class User {

@@ -2,17 +2,9 @@ package vn.minhduc.laptopshop.validator.user.validate;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.stereotype.Service;
-import vn.minhduc.laptopshop.service.UserService;
 import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
 
-@Service
 public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
-    private UserService userService;
-
-    public EmailValidator(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public void initialize(ValidEmail constraintAnnotation) {
@@ -35,12 +27,6 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
         if (!value.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@gmail\\.com$")) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate("Email không đúng định dang").addConstraintViolation();
-            return false;
-        }
-
-        if (userService.checkEmailExist(value)) {
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Email đã tồn tại trong hệ thống").addConstraintViolation();
             return false;
         }
         return true;

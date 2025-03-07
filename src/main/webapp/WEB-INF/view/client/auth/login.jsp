@@ -11,7 +11,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Login</title>
-    <link href="/style/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/style/styles.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 

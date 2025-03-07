@@ -4,10 +4,16 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Service;
 import vn.minhduc.laptopshop.domain.dto.RegisterDTO;
+import vn.minhduc.laptopshop.service.UserService;
 import vn.minhduc.laptopshop.validator.register.annotation.ValidConfirmPassword;
 
 @Service
 public class ConfirmPasswordValidator implements ConstraintValidator<ValidConfirmPassword, RegisterDTO> {
+        private final UserService userService;
+
+    public ConfirmPasswordValidator(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public boolean isValid(RegisterDTO registerDTO, ConstraintValidatorContext context) {
