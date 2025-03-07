@@ -1,12 +1,31 @@
 package vn.minhduc.laptopshop.domain.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import vn.minhduc.laptopshop.validator.register.annotation.ValidFirstName;
+import vn.minhduc.laptopshop.validator.register.annotation.ValidLastName;
+import vn.minhduc.laptopshop.validator.register.annotation.ValidConfirmPassword;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
+
+@ValidConfirmPassword
 public class RegisterDTO {
+    @ValidFirstName
     private String firstName;
+
+    @ValidLastName
     private String lastName;
+
+    @ValidEmail
     private String email;
+
+    @vn.minhduc.laptopshop.validator.user.annotation.ValidPassword
     private String password;
     private String confirmPassword;
+
+    @ValidPhone
     private String phone;
+
+    @NotEmpty(message = "Địa chỉ không được để trống")
     private String address;
 
     public String getFirstName() {
