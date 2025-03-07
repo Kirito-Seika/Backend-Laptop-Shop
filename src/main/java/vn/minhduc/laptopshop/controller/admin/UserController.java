@@ -19,11 +19,7 @@ public class UserController {
     private final UploadService uploadService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(
-            UserService userService,
-            UploadService uploadService,
-            PasswordEncoder passwordEncoder
-    ) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
@@ -58,13 +54,8 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(
-            Model model,
-            @ModelAttribute("createUser") @Valid User user,
-            BindingResult createUserBindingResult,
-            @RequestParam("file") MultipartFile file
-    ) {
-        if(createUserBindingResult.hasErrors()) {
+    public String createUserPage(Model model, @ModelAttribute("createUser") @Valid User user, BindingResult createUserBindingResult, @RequestParam("file") MultipartFile file) {
+        if (createUserBindingResult.hasErrors()) {
             return "admin/user/create";
         }
         String avatar = this.uploadService.handleUploadFile(file, "avatar");

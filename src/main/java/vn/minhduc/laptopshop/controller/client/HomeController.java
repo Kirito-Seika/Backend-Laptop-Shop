@@ -22,11 +22,7 @@ public class HomeController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public HomeController(
-            ProductService productService,
-            UserService userService,
-            PasswordEncoder passwordEncoder
-    ) {
+    public HomeController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -46,10 +42,7 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String handleRegister(
-            @ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
-            BindingResult bindingResult
-    ) {
+    public String handleRegister(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "client/auth/register";
         }

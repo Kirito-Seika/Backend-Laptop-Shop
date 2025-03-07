@@ -14,29 +14,25 @@ public class NameValidator implements ConstraintValidator<ValidName, String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null || value.trim().isEmpty()) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Tên không được để trống")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Tên không được để trống").addConstraintViolation();
             return false;
         }
 
         if (value.length() < 6) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Tên phải có ít nhất 6 ký tự")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Tên phải có ít nhất 6 ký tự").addConstraintViolation();
             return false;
         }
 
         if (Character.isDigit(value.charAt(0))) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Tên không được bắt đầu bằng chữ số")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Tên không được bắt đầu bằng chữ số").addConstraintViolation();
             return false;
         }
 
         if (!value.matches("^[a-zA-ZàÀáÁảẢãÃạẠâÂầẦấẤẩẨẫẪậẬăĂằẰắẮẳẲẵẴặẶđĐêÊềỀếẾểỂễỄệỆiIìÌíÍỉỈĩĨịỊôÔồỒốỐổỔỗỖộỘơƠớỚờỜởỞỡỠợỢuUùÙúÚủỦũŨụỤưƯừỪứỨửỬữỮựỰ\\s0-9]+$")) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Tên không được chứa ký tự đặc biệt")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Tên không được chứa ký tự đặc biệt").addConstraintViolation();
             return false;
         }
         return true;

@@ -15,35 +15,32 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
     }
 
     @Override
-    public void initialize(ValidEmail constraintAnnotation) {}
+    public void initialize(ValidEmail constraintAnnotation) {
+    }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null || value.trim().isEmpty()) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Email không được để trống")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Email không được để trống").addConstraintViolation();
             return false;
         }
 
         if (Character.isDigit(value.charAt(0))) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Email không được bắt đầu bằng chữ số")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Email không được bắt đầu bằng chữ số").addConstraintViolation();
             return false;
         }
 
         if (!value.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@gmail\\.com$")) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Email không đúng định dang")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Email không đúng định dang").addConstraintViolation();
             return false;
         }
 
         if (userService.checkEmailExist(value)) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Email đã tồn tại trong hệ thống")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Email đã tồn tại trong hệ thống").addConstraintViolation();
             return false;
         }
         return true;

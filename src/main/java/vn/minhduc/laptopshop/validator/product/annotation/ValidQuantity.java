@@ -10,10 +10,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Constraint(validatedBy = QuantityValidator.class) // Liên kết với PriceValidator
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidQuantity {
     String message() default "Số lượng sản phẩm không hợp lệ";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

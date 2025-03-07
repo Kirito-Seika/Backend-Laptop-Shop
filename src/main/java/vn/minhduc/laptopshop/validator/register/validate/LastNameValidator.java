@@ -13,29 +13,25 @@ public class LastNameValidator implements ConstraintValidator<ValidLastName, Str
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null || value.trim().isEmpty()) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("LastName không được để trống")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("LastName không được để trống").addConstraintViolation();
             return false;
         }
 
         if (value.length() < 6) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("LastName phải có ít nhất 6 ký tự")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("LastName phải có ít nhất 6 ký tự").addConstraintViolation();
             return false;
         }
 
         if (Character.isDigit(value.charAt(0))) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("LastName không được bắt đầu bằng chữ số")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("LastName không được bắt đầu bằng chữ số").addConstraintViolation();
             return false;
         }
 
         if (!value.matches("^[a-zA-ZàÀáÁảẢãÃạẠâÂầẦấẤẩẨẫẪậẬăĂằẰắẮẳẲẵẴặẶđĐêÊềỀếẾểỂễỄệỆiIìÌíÍỉỈĩĨịỊôÔồỒốỐổỔỗỖộỘơƠớỚờỜởỞỡỠợỢuUùÙúÚủỦũŨụỤưƯừỪứỨửỬữỮựỰ\\s0-9]+$")) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("LastName không được chứa ký tự đặc biệt")
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("LastName không được chứa ký tự đặc biệt").addConstraintViolation();
             return false;
         }
         return true;

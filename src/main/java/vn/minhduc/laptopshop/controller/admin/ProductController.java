@@ -18,9 +18,7 @@ public class ProductController {
     private final UploadService uploadService;
     private final ProductService productService;
 
-    public ProductController(
-            UploadService uploadService,
-            ProductService productService) {
+    public ProductController(UploadService uploadService, ProductService productService) {
         this.uploadService = uploadService;
         this.productService = productService;
     }
@@ -47,11 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String createProductPage(
-            @ModelAttribute("createProduct") @Valid Product product,
-            BindingResult createProductBindingResult,
-            @RequestParam("file") MultipartFile file
-    ) {
+    public String createProductPage(@ModelAttribute("createProduct") @Valid Product product, BindingResult createProductBindingResult, @RequestParam("file") MultipartFile file) {
         if (createProductBindingResult.hasErrors()) {
             return "admin/product/create";
         }
@@ -69,11 +63,7 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/update")
-    public String postUpdateProduct(
-            @ModelAttribute("updateProduct") @Valid Product product,
-            BindingResult newProductBindingResult,
-            @RequestParam("file") MultipartFile file
-    ) {
+    public String postUpdateProduct(@ModelAttribute("updateProduct") @Valid Product product, BindingResult newProductBindingResult, @RequestParam("file") MultipartFile file) {
         if (newProductBindingResult.hasErrors()) {
             return "admin/product/update";
         }

@@ -63,12 +63,6 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail{" +
-                "id=" + id +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", order=" + order +
-                ", product=" + product +
-                '}';
+        return "OrderDetail{" + "id=" + id + ", quantity=" + quantity + ", price=" + price + ", order=" + order + ", product=" + product + '}';
     }
 }

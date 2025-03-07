@@ -14,6 +14,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPrice {
     String message() default "Giá không hợp lệ";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
