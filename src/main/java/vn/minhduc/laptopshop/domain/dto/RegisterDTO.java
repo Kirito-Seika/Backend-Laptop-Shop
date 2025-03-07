@@ -6,6 +6,7 @@ import vn.minhduc.laptopshop.validator.register.annotation.ValidLastName;
 import vn.minhduc.laptopshop.validator.register.annotation.ValidConfirmPassword;
 import vn.minhduc.laptopshop.validator.user.annotation.ValidEmail;
 import vn.minhduc.laptopshop.validator.user.annotation.ValidPhone;
+import vn.minhduc.laptopshop.validator.user.annotation.ValidPassword;
 
 @ValidConfirmPassword
 public class RegisterDTO {
@@ -18,7 +19,7 @@ public class RegisterDTO {
     @ValidEmail
     private String email;
 
-    @vn.minhduc.laptopshop.validator.user.annotation.ValidPassword
+    @ValidPassword
     private String password;
     private String confirmPassword;
 
