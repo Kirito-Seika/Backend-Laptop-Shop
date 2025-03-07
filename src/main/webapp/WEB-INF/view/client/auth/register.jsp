@@ -68,6 +68,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <form:input class="form-control" type="text"
+                                                            placeholder="Phone" path="phone"/>
+                                                <label>Phone</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <form:input class="form-control" type="password"
+                                                            placeholder="Address"
+                                                            path="address"/>
+                                                <label>Address</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid">
                                             <button class="btn btn-primary btn-block">
