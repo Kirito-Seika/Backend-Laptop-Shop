@@ -22,4 +22,9 @@ public class HomeController {
         model.addAttribute("products", products);
         return "client/home/layout";
     }
+
+    @GetMapping("/register")
+    public String getRegisterPage(Model model) {
+        return "client/auth/register";
+    }
 }
