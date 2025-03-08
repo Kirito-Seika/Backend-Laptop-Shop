@@ -13,6 +13,7 @@ import vn.minhduc.laptopshop.domain.Product;
 import vn.minhduc.laptopshop.domain.User;
 import vn.minhduc.laptopshop.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,7 +48,7 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
         Cart cart = this.productService.fetchByUser(currentUser);
-        List<CartDetail> cartDetails = cart.getCartDetails();
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
         double totalPrice = 0;
         for (CartDetail cartDetail : cartDetails) {
             totalPrice += cartDetail.getPrice() * cartDetail.getQuantity();
