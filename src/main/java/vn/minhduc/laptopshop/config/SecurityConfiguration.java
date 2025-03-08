@@ -46,15 +46,16 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE)
                         .permitAll()
-                        .requestMatchers("/", "/login", "/product/**",
-                                "/client/**", "/css/**", "/js/**", "/images/**")
+                        .requestMatchers("/", "/login", "/register", "/product/**",
+                                "/client/**", "/style/**", "/javascript/**", "/image/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login").failureUrl("/login?error")
                         .successHandler(customSuccessHandler())
-                        .permitAll());
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
         return http.build();
     }
 }
