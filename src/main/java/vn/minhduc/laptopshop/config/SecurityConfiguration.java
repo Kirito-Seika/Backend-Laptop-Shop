@@ -67,7 +67,6 @@ public class SecurityConfiguration {
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false))
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
-
                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login").failureUrl("/login?error")
