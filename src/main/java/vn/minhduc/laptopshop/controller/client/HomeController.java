@@ -3,6 +3,9 @@ package vn.minhduc.laptopshop.controller.client;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +44,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String getHomePage(Model model) {
-//        List<Product> products = this.productService.getAllProducts();
-//        model.addAttribute("products", products);
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Product> prs = this.productService.getAllProducts(pageable);
+        List<Product> products = prs.getContent();
+        model.addAttribute("products", products);
         return "client/home/layout";
     }
 
