@@ -1,5 +1,7 @@
 package vn.minhduc.laptopshop.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.minhduc.laptopshop.domain.Order;
 import vn.minhduc.laptopshop.domain.OrderDetail;
@@ -23,8 +25,8 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getAllOrders() {
-        return this.orderRepository.findAll();
+    public Page<Order> getAllOrders(Pageable page) {
+        return this.orderRepository.findAll(page);
     }
 
     public Optional<Order> getOrderById(long id) {

@@ -27,13 +27,21 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProductPage(Model model, @RequestParam("page") int page) {
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         Pageable pageable = PageRequest.of(page - 1, 5);
-        Page<Product> prs = this.productService.getAllProducts(pageable);
-        List<Product> products = prs.getContent();
+        Page<Product> productPage = this.productService.getAllProducts(pageable);
+        List<Product> products = productPage.getContent();
         model.addAttribute("listProducts", products);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("totalPages", productPage.getTotalPages());
         return "admin/product/layout";
     }
 
