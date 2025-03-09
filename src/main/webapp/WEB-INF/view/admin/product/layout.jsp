@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +34,6 @@
                                 <h3>Table Products</h3>
                                 <a href="/admin/product/create" class="btn btn-primary">Create a product</a>
                             </div>
-
                             <hr/>
                             <table class=" table table-bordered table-hover">
                                 <thead>
@@ -50,7 +50,9 @@
                                     <tr>
                                         <th>${product.id}</th>
                                         <td>${product.name}</td>
-                                        <td>${product.price}</td>
+                                        <td>
+                                            <fmt:formatNumber type="number" value="${product.price}" /> đ
+                                        </td>
                                         <td>${product.factory}</td>
                                         <td>
                                             <a href="/admin/product/${product.id}"
@@ -61,15 +63,11 @@
                                                class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
-
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </main>
