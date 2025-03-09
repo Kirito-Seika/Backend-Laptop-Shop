@@ -15,9 +15,9 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String getAdminPage(Model model) {
-        model.addAttribute("countUsers", userService.countUsers());
-        model.addAttribute("countProducts", userService.countProducts());
-        model.addAttribute("countOrders", userService.countOrders());
+        model.addAttribute("countUsers", this.userService.countUsers());
+        model.addAttribute("countProducts", this.userService.countProducts());
+        model.addAttribute("countOrders", this.userService.countOrders());
         return "admin/dashboard/layout";
     }
 }

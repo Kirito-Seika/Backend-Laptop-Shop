@@ -3,6 +3,7 @@ package vn.minhduc.laptopshop.service;
 import org.springframework.stereotype.Service;
 import vn.minhduc.laptopshop.domain.Order;
 import vn.minhduc.laptopshop.domain.OrderDetail;
+import vn.minhduc.laptopshop.domain.User;
 import vn.minhduc.laptopshop.repository.OrderDetailRepository;
 import vn.minhduc.laptopshop.repository.OrderRepository;
 
@@ -49,5 +50,9 @@ public class OrderService {
             currentOrder.setStatus(order.getStatus());
             this.orderRepository.save(currentOrder);
         }
+    }
+
+    public List<Order> getOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }

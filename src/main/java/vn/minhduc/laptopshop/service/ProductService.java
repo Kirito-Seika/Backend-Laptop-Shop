@@ -49,7 +49,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void addProductToCart(String email, long productId, HttpSession session) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session, long quantity) {
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
             Cart cart = this.cartRepository.findByUser(user);
@@ -62,26 +62,28 @@ public class ProductService {
             Optional<Product> productOptional = this.productRepository.findById(productId);
             if (productOptional.isPresent()) {
                 Product realProduct = productOptional.get();
-
                 CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
                 if (oldDetail == null) {
                     CartDetail cartDetail = new CartDetail();
                     cartDetail.setCart(cart);
                     cartDetail.setProduct(realProduct);
                     cartDetail.setPrice(realProduct.getPrice());
-                    cartDetail.setQuantity(1);
+                    cartDetail.setQuantity(quantity);
                     this.cartDetailRepository.save(cartDetail);
-
                     int s = cart.getSum() + 1;
                     cart.setSum(s);
                     this.cartRepository.save(cart);
                     session.setAttribute("sum", s);
                 } else {
-                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                    oldDetail.setQuantity(oldDetail.getQuantity() + quantity);
                     this.cartDetailRepository.save(oldDetail);
                 }
             }
         }
+    }
+
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 
     public void removeCartDetail(long cartDetailId, HttpSession session) {
@@ -111,10 +113,6 @@ public class ProductService {
                 this.cartDetailRepository.save(currentCartDetail);
             }
         }
-    }
-
-    public Cart fetchByUser(User user) {
-        return this.cartRepository.findByUser(user);
     }
 
     public void placeOrder(
