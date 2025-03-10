@@ -1,23 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laptop Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+            rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+          rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -29,12 +30,22 @@
 
     <!-- Template Stylesheet -->
     <link href="/client/css/style.css" rel="stylesheet">
+
+    <meta name="_csrf" content="${_csrf.token}" />
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+          rel="stylesheet">
+
 </head>
+
 <body>
 
-<jsp:include page="../layout/header.jsp"/>
+<jsp:include page="../layout/header.jsp" />
 
-<jsp:include page="../layout/banner.jsp"/>
+<jsp:include page="../layout/banner.jsp" />
+
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
@@ -42,7 +53,7 @@
         <div class="tab-class text-center">
             <div class="row g-4">
                 <div class="col-lg-4 text-start">
-                    <h1>Sản Phẩm Nổi Bật</h1>
+                    <h1>Sản phẩm nổi bật</h1>
                 </div>
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -67,33 +78,36 @@
                                                      class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                 style="top: 10px; left: 10px;">Laptop
-                                            </div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                 style="top: 10px; left: 10px;">Laptop</div>
+                                            <div
+                                                    class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4 style="font-size: 15px;">
                                                     <a href="/product/${product.id}">
                                                             ${product.name}
                                                     </a>
+
                                                 </h4>
                                                 <p style="font-size: 13px;">${product.shortDesc}</p>
-                                                <div class="d-flex flex-lg-wrap justify-content-center flex-column">
+                                                <div
+                                                        class="d-flex  flex-lg-wrap justify-content-center flex-column">
                                                     <p style="font-size: 15px; text-align: center; width: 100%;"
                                                        class="text-dark  fw-bold mb-3">
                                                         <fmt:formatNumber type="number"
-                                                                          value="${product.price}"/> đ
+                                                                          value="${product.price}" /> đ
                                                     </p>
-                                                    <form action="/add-product-to-cart/${product.id}"
-                                                          method="post">
-                                                        <input type="hidden"
-                                                               name="${_csrf.parameterName}"
-                                                               value="${_csrf.token}"/>
-                                                        <button
-                                                                class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
-                                                            <i
-                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                            Add to cart
-                                                        </button>
-                                                    </form>
+                                                    <!-- <form action="/add-product-to-cart/${product.id}"
+                                                                        method="post">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" /> -->
+
+                                                    <button data-product-id="${product.id}"
+                                                            class="btnAddToCartHomepage mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <i
+                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                        Add to cart
+                                                    </button>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -109,13 +123,15 @@
 </div>
 <!-- Fruits Shop End-->
 
-<jsp:include page="../layout/featurs.jsp"/>
+<jsp:include page="../layout/featurs.jsp" />
 
-<jsp:include page="../layout/footer.jsp"/>
+<jsp:include page="../layout/footer.jsp" />
+
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
         class="fa fa-arrow-up"></i></a>
+
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -127,5 +143,8 @@
 
 <!-- Template Javascript -->
 <script src="/client/js/main.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 </body>
+
 </html>
