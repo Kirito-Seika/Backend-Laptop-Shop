@@ -8,10 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import vn.minhduc.laptopshop.domain.Cart;
-import vn.minhduc.laptopshop.domain.CartDetail;
-import vn.minhduc.laptopshop.domain.Product;
-import vn.minhduc.laptopshop.domain.User;
+import vn.minhduc.laptopshop.domain.*;
 import vn.minhduc.laptopshop.service.ProductService;
 
 import java.util.ArrayList;
@@ -27,7 +24,11 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional, @RequestParam("name") Optional<String> nameOptional) {
+    public String getProductPage(
+            Model model,
+            @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional
+    ) {
         int page = 1;
         try {
             if (pageOptional.isPresent()) {
@@ -36,9 +37,9 @@ public class ItemController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        String name = nameOptional.get();
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Product> productPage = this.productService.getAllProducts(pageable, name);
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Page<Product> productPage = this.productService.getProductWithSpecification(pageable, name);
         List<Product> products = productPage.getContent();
 
         model.addAttribute("products", products);

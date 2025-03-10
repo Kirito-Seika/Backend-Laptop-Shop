@@ -10,16 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import vn.minhduc.laptopshop.domain.Order;
-import vn.minhduc.laptopshop.domain.Product;
-import vn.minhduc.laptopshop.domain.User;
+import org.springframework.web.bind.annotation.*;
 import vn.minhduc.laptopshop.domain.dto.RegisterDTO;
-import vn.minhduc.laptopshop.service.OrderService;
-import vn.minhduc.laptopshop.service.ProductService;
-import vn.minhduc.laptopshop.service.UserService;
+import vn.minhduc.laptopshop.domain.*;
+import vn.minhduc.laptopshop.service.*;
 
 import java.util.List;
 

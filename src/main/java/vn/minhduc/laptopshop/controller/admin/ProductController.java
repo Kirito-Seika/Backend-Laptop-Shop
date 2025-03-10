@@ -10,8 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.minhduc.laptopshop.domain.Product;
-import vn.minhduc.laptopshop.service.ProductService;
-import vn.minhduc.laptopshop.service.UploadService;
+import vn.minhduc.laptopshop.service.*;
 
 import java.util.List;
 import java.util.Optional;
