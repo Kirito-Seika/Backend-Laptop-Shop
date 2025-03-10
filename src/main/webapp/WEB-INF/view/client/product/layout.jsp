@@ -21,7 +21,7 @@
             rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
           rel="stylesheet">
 
@@ -39,7 +39,7 @@
 
 <body>
 
-<jsp:include page="../layout/header.jsp" />
+<jsp:include page="../layout/header.jsp"/>
 
 <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5">
@@ -58,7 +58,7 @@
             <div class="row g-4 fruite">
                 <div class="col-12 col-md-4">
                     <div class="row g-4">
-                        <div class="col-12">
+                        <div class="col-12" id="factoryFilter">
                             <div class="mb-2"><b>Hãng sản xuất</b></div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="factory-1"
@@ -94,7 +94,7 @@
                             </div>
 
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" id="targetFilter">
                             <div class="mb-2"><b>Mục đích sử dụng</b></div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="target-1"
@@ -127,7 +127,7 @@
 
 
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" id="priceFilter">
                             <div class="mb-2"><b>Mức giá</b></div>
 
                             <div class="form-check form-check-inline">
@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="sort-3"
+                                <input class="form-check-input" type="radio" id="sort-3" checked
                                        value="gia-nothing" name="radio-sort">
                                 <label class="form-check-label" for="sort-3">Không sắp xếp</label>
                             </div>
@@ -180,7 +180,8 @@
                         </div>
                         <div class="col-12">
                             <button
-                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4">
+                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4"
+                                    id="btnFilter">
                                 Lọc Sản Phẩm
                             </button>
                         </div>
@@ -213,17 +214,18 @@
                                             <p style="font-size: 15px; text-align: center; width: 100%;"
                                                class="text-dark  fw-bold mb-3">
                                                 <fmt:formatNumber type="number"
-                                                                  value="${product.price}" />
+                                                                  value="${product.price}"/>
                                                 đ
                                             </p>
                                             <form action="/add-product-to-cart/${product.id}"
                                                   method="post">
                                                 <input type="hidden" name="${_csrf.parameterName}"
-                                                       value="${_csrf.token}" />
+                                                       value="${_csrf.token}"/>
 
                                                 <button
-                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                                    <i
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
                                                     Add to cart
                                                 </button>
                                             </form>
@@ -263,7 +265,7 @@
 </div>
 <!-- Single Product End -->
 
-<jsp:include page="../layout/footer.jsp" />
+<jsp:include page="../layout/footer.jsp"/>
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i

@@ -29,10 +29,10 @@ public class ItemController {
             Model model,
             @RequestParam("page") Optional<String> pageOptional,
             @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("min-price") Optional<String> minOptional,
-            @RequestParam("max-price") Optional<String> maxOptional,
             @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("price") Optional<String> priceOptional
+            @RequestParam("target") Optional<String> targetOptional,
+            @RequestParam("price") Optional<String> priceOptional,
+            @RequestParam("sort") Optional<String> sortOptional
     ) {
         int page = 1;
         try {
@@ -43,37 +43,37 @@ public class ItemController {
             // TODO: handle exception
         }
         Pageable pageable = PageRequest.of(page - 1, 60);
-//        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-//        Page<Product> productPage = this.productService.getProductWithSpecification(pageable, name);
 
-//         case 1
-//         double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get())
-//         : 0;
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, min);
-//
-//         case 2
-//         double max = maxOptional.isPresent() ? Double.parseDouble(maxOptional.get())
-//         : 0;
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, max);
-//
-//         case 3
-//         String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-//         factory);
-//
-//         case 4
-//         List<String> factory = Arrays.asList(factoryOptional.get().split(","));
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-//         factory);
-//
-//         case 5
-//         String price = priceOptional.isPresent() ? priceOptional.get() : "";
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-//         price);
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Page<Product> productPage = this.productService.getProductWithSpecification(pageable, name);
+
+        // case 1
+        // double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get())
+        // : 0;
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable, min);
+
+        // case 2
+        // double max = maxOptional.isPresent() ? Double.parseDouble(maxOptional.get())
+        // : 0;
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable, max);
+
+        // case 3
+        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable, factory);
+
+        // case 4
+        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable, factory);
+
+        // case 5
+        // String price = priceOptional.isPresent() ? priceOptional.get() : "";
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable, price);
 
         // case 6
-        List<String> price = Arrays.asList(priceOptional.get().split(","));
-        Page<Product> productPage = this.productService.getProductWithSpecification(pageable, price);
+        // List<String> price = Arrays.asList(priceOptional.get().split(","));
+        // Page<Product> productPage = this.productService.getProductWithSpecification(pageable,
+        // price);
+
         List<Product> products = productPage.getContent();
 
         model.addAttribute("products", products);
@@ -150,12 +150,7 @@ public class ItemController {
     }
 
     @PostMapping("/place-order")
-    public String handlePlaceOrder(
-            HttpServletRequest request,
-            @RequestParam("receiverName") String receiverName,
-            @RequestParam("receiverAddress") String receiverAddress,
-            @RequestParam("receiverPhone") String receiverPhone
-    ) {
+    public String handlePlaceOrder(HttpServletRequest request, @RequestParam("receiverName") String receiverName, @RequestParam("receiverAddress") String receiverAddress, @RequestParam("receiverPhone") String receiverPhone) {
         User currentUser = new User();
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
@@ -170,10 +165,7 @@ public class ItemController {
     }
 
     @PostMapping("/add-product-from-view-detail")
-    public String handleAddProductFromViewDetail(
-            @RequestParam("id") long id,
-            @RequestParam("quantity") long quantity,
-            HttpServletRequest request) {
+    public String handleAddProductFromViewDetail(@RequestParam("id") long id, @RequestParam("quantity") long quantity, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
 
         String email = (String) session.getAttribute("email");
