@@ -9,12 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.minhduc.laptopshop.domain.*;
+import vn.minhduc.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.minhduc.laptopshop.service.ProductService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class ItemController {
@@ -27,25 +27,20 @@ public class ItemController {
     @GetMapping("/products")
     public String getProductPage(
             Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("target") Optional<String> targetOptional,
-            @RequestParam("price") Optional<String> priceOptional,
-            @RequestParam("sort") Optional<String> sortOptional
+            ProductCriteriaDTO productCriteriaDTO
     ) {
         int page = 1;
         try {
-            if (pageOptional.isPresent()) {
-                page = Integer.parseInt(pageOptional.get());
+            if (productCriteriaDTO.getPage().isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
         Pageable pageable = PageRequest.of(page - 1, 60);
 
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-        Page<Product> productPage = this.productService.getProductWithSpecification(pageable, name);
+        Page<Product> productPage = this.productService.getAllProducts(pageable);
 
         // case 1
         // double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get())
