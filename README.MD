@@ -3,15 +3,12 @@
 ### I. Giới thiệu dự án
 1. Về dự án:
     - Dự án bán Laptop, với mục tiêu tạo ra một nền tảng tìm kiếm và mua bán Laptop.
-    - Công nghệ sử dụng: JavaSpring
+    - Công nghệ sử dụng: JavaSpring + JSP
 
 2. Môi trường Java:
     - Môi trường chạy dự án là Java version 17
 
-3. Tài nguyên:
-    - Download tài nguyên (FE) tại đây: 
-
-4. Cách chạy dự án:
+3. Cách chạy dự án:
     - Clone dự án.
     - Chạy dự án.
 
