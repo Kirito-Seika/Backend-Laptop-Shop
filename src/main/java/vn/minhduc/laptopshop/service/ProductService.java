@@ -3,6 +3,7 @@ package vn.minhduc.laptopshop.service;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import vn.minhduc.laptopshop.domain.*;
 import vn.minhduc.laptopshop.repository.*;
@@ -35,8 +36,12 @@ public class ProductService {
         this.orderDetailRepository = orderDetailRepository;
     }
 
-    public Page<Product> getAllProducts(Pageable page) {
-        return this.productRepository.findAll(page);
+    private Specification<Product> nameLike(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
+    }
+
+    public Page<Product> getAllProducts(Pageable page, String name) {
+        return this.productRepository.findAll(this.nameLike(name),page);
     }
 
     public Product createProduct(Product product) {
