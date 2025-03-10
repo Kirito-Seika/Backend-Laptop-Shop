@@ -21,7 +21,7 @@
             rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
           rel="stylesheet">
 
@@ -39,7 +39,7 @@
 
 <body>
 
-<jsp:include page="../layout/header.jsp"/>
+<jsp:include page="../layout/header.jsp" />
 
 <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5">
@@ -208,6 +208,7 @@
                                             <a href="/product/${product.id}">
                                                     ${product.name}
                                             </a>
+
                                         </h4>
                                         <p style="font-size: 13px;">
                                                 ${product.shortDesc}</p>
@@ -216,18 +217,17 @@
                                             <p style="font-size: 15px; text-align: center; width: 100%;"
                                                class="text-dark  fw-bold mb-3">
                                                 <fmt:formatNumber type="number"
-                                                                  value="${product.price}"/>
+                                                                  value="${product.price}" />
                                                 đ
                                             </p>
                                             <form action="/add-product-to-cart/${product.id}"
                                                   method="post">
                                                 <input type="hidden" name="${_csrf.parameterName}"
-                                                       value="${_csrf.token}"/>
+                                                       value="${_csrf.token}" />
 
                                                 <button
-                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
-                                                    <i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
                                                     Add to cart
                                                 </button>
                                             </form>
@@ -236,28 +236,32 @@
                                 </div>
                             </div>
                         </c:forEach>
+
                         <c:if test="${totalPages > 0}">
                             <div class="pagination d-flex justify-content-center mt-5">
                                 <li class="page-item">
                                     <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                       href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                       href="/products?page=${currentPage - 1}${queryString}"
+                                       aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
                                     <li class="page-item">
                                         <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                           href="/products?page=${loop.index + 1}">
+                                           href="/products?page=${loop.index + 1}${queryString}">
                                                 ${loop.index + 1}
                                         </a>
                                     </li>
                                 </c:forEach>
                                 <li class="page-item">
                                     <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                       href="/products?page=${currentPage + 1}" aria-label="Next">
+                                       href="/products?page=${currentPage + 1}${queryString}"
+                                       aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
+
                             </div>
                         </c:if>
                     </div>
@@ -268,7 +272,7 @@
 </div>
 <!-- Single Product End -->
 
-<jsp:include page="../layout/footer.jsp"/>
+<jsp:include page="../layout/footer.jsp" />
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i

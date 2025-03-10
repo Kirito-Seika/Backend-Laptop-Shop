@@ -63,10 +63,11 @@ public class ProductService {
     }
 
     public Specification<Product> buildPriceSpecification(List<String> price) {
-        Specification<Product> combinedSpec = (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
+        Specification<Product> combinedSpec = Specification.where(null);
         for (String p : price) {
             double min = 0;
             double max = 0;
+
             switch (p) {
                 case "duoi-10-trieu":
                     min = 0;

@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,26 +28,41 @@ public class ItemController {
     @GetMapping("/products")
     public String getProductPage(
             Model model,
-            ProductCriteriaDTO productCriteriaDTO
+            ProductCriteriaDTO productCriteriaDTO,
+            HttpServletRequest request
     ) {
         int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
-                // convert from String to int
                 page = Integer.parseInt(productCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 60);
+        Pageable pageable = PageRequest.of(page - 1, 10);
+
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            String sort = productCriteriaDTO.getSort().get();
+            if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 10, Sort.by(Product_.PRICE).ascending());
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 10, Sort.by(Product_.PRICE).descending());
+            }
+        }
 
         Page<Product> productPage = this.productService.getProductWithSpecification(pageable, productCriteriaDTO);
 
         List<Product> products = productPage.getContent().size() > 0 ? productPage.getContent() : new ArrayList<Product>();
 
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            qs = qs.replace("page=" + page, "");
+        }
+
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("queryString", qs);
         return "client/product/layout";
     }
 
