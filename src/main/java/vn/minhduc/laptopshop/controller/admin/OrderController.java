@@ -3,10 +3,11 @@ package vn.minhduc.laptopshop.controller.admin;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import vn.minhduc.laptopshop.domain.Order;
+import vn.minhduc.laptopshop.domain.*;
 import vn.minhduc.laptopshop.service.OrderService;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class OrderController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 5);
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by(Order_.ID).descending());
         Page<Order> orderPage = this.orderService.getAllOrders(pageable);
         List<Order> orders = orderPage.getContent();
         model.addAttribute("orders", orders);
