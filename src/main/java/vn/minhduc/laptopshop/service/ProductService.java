@@ -175,9 +175,11 @@ public class ProductService {
 
     public void placeOrder(
             User user, HttpSession session,
-            String receiverName, String receiverAddress,
+            String receiverName,
+            String receiverAddress,
             String receiverPhone,
-            String paymentMethod
+            String paymentMethod,
+            String uuid
     ) {
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null) {
@@ -189,10 +191,9 @@ public class ProductService {
                 order.setReceiverAddress(receiverAddress);
                 order.setReceiverPhone(receiverPhone);
                 order.setStatus("PENDING");
-                
+
                 order.setPaymentMethod(paymentMethod);
                 order.setPaymentStatus("PAYMENT_UNPAID");
-                final String uuid = UUID.randomUUID().toString().replace("-", "");
                 order.setPaymentRef(paymentMethod.equals("COD") ? "UNKNOWN" : uuid);
 
                 double sum = 0;
@@ -201,6 +202,7 @@ public class ProductService {
                 }
                 order.setTotalPrice(sum);
                 order = this.orderRepository.save(order);
+
                 for (CartDetail cartDetail : cartDetails) {
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail.setOrder(order);

@@ -12,17 +12,25 @@ import org.springframework.web.bind.annotation.*;
 import vn.minhduc.laptopshop.domain.*;
 import vn.minhduc.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.minhduc.laptopshop.service.ProductService;
+import vn.minhduc.laptopshop.service.VNPayService;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
 public class ItemController {
     private final ProductService productService;
+    private final VNPayService vNPayService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(
+            ProductService productService,
+            VNPayService vNPayService
+    ) {
         this.productService = productService;
+        this.vNPayService = vNPayService;
     }
 
     @GetMapping("/products")
@@ -139,15 +147,22 @@ public class ItemController {
             @RequestParam("receiverName") String receiverName,
             @RequestParam("receiverAddress") String receiverAddress,
             @RequestParam("receiverPhone") String receiverPhone,
-            @RequestParam("paymentMethod") String paymentMethod
-    ) {
-        User currentUser = new User();
+            @RequestParam("paymentMethod") String paymentMethod,
+            @RequestParam("totalPrice") String totalPrice
+    ) throws UnsupportedEncodingException {
+        User currentUser = new User();// null
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
-        this.productService.placeOrder(currentUser, session, receiverName, receiverAddress, receiverPhone, paymentMethod);
-        if(!paymentMethod.equals("COD")){
-            //
+
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+
+        this.productService.placeOrder(currentUser, session, receiverName, receiverAddress, receiverPhone, paymentMethod, uuid);
+
+        if (!paymentMethod.equals("COD")) {
+            String ip = this.vNPayService.getIpAddress(request);
+            String vnpUrl = this.vNPayService.generateVNPayURL(Double.parseDouble(totalPrice), uuid, ip);
+            return "redirect:" + vnpUrl;
         }
         return "redirect:/thanks";
     }
