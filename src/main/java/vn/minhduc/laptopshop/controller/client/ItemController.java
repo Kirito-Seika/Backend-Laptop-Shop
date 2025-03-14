@@ -134,12 +134,21 @@ public class ItemController {
     }
 
     @PostMapping("/place-order")
-    public String handlePlaceOrder(HttpServletRequest request, @RequestParam("receiverName") String receiverName, @RequestParam("receiverAddress") String receiverAddress, @RequestParam("receiverPhone") String receiverPhone) {
+    public String handlePlaceOrder(
+            HttpServletRequest request,
+            @RequestParam("receiverName") String receiverName,
+            @RequestParam("receiverAddress") String receiverAddress,
+            @RequestParam("receiverPhone") String receiverPhone,
+            @RequestParam("paymentMethod") String paymentMethod
+    ) {
         User currentUser = new User();
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
-        this.productService.placeOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+        this.productService.placeOrder(currentUser, session, receiverName, receiverAddress, receiverPhone, paymentMethod);
+        if(!paymentMethod.equals("COD")){
+            //
+        }
         return "redirect:/thanks";
     }
 

@@ -24,6 +24,12 @@ public class Order implements Serializable {
 
     private String status;
 
+    private String paymentRef;
+
+    private String paymentStatus;
+
+    private String paymentMethod;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -95,6 +101,30 @@ public class Order implements Serializable {
         this.orderDetails = orderDetails;
     }
 
+    public String getPaymentRef() {
+        return paymentRef;
+    }
+
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -104,6 +134,9 @@ public class Order implements Serializable {
                 ", receiverAddress='" + receiverAddress + '\'' +
                 ", receiverPhone='" + receiverPhone + '\'' +
                 ", status='" + status + '\'' +
+                ", paymentRef='" + paymentRef + '\'' +
+                ", paymentStatus='" + paymentStatus + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
                 ", user=" + user +
                 ", orderDetails=" + orderDetails +
                 '}';
