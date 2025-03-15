@@ -34,6 +34,15 @@ public class User implements Serializable {
 
     private String avatar;
 
+    private String provider;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.provider == null) {
+            this.provider = "LOCAL";
+        }
+    }
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -100,6 +109,14 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -134,6 +151,7 @@ public class User implements Serializable {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", provider='" + provider + '\'' +
                 ", role=" + role +
                 ", orders=" + orders +
                 ", cart=" + cart +
