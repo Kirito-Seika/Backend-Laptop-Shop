@@ -4,6 +4,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
@@ -33,24 +34,41 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         // Process oAuth2User or map it to your local user database
         String email = (String) attributes.get("email");
+
         String fullName = (String) attributes.get("name");
 
         Role userRole = this.userService.getRoleByName("USER");
 
-        if (email != null) {
+        if (email == null) {
+            OAuth2Error error = new OAuth2Error("invalid_request",
+                    "Không thể đăng nhập với tài khoản Github private Email. Vui lòng đổi tài khoản Github khác", null);
+            throw new OAuth2AuthenticationException(error);
+        } else {
             User user = this.userService.getUserByEmail(email);
             if (user == null) {
                 User oUser = new User();
                 oUser.setEmail(email);
-                oUser.setAvatar("default-google.png");
+                oUser.setAvatar(
+                        registrationId.equalsIgnoreCase("github")
+                                ? "default-github.png"
+                                : "default-google.png");
                 oUser.setFullName(fullName);
-                oUser.setProvider("GOOGLE");
+                oUser.setProvider(
+                        registrationId.equalsIgnoreCase("github")
+                                ? "GITHUB"
+                                : "GOOGLE");
                 oUser.setPassword("laptopshop");
                 oUser.setAddress("Việt Nam");
                 oUser.setPhone("0123456789");
                 oUser.setRole(userRole);
 
                 this.userService.saveUser(oUser);
+            } else {
+                if (!user.getProvider().equalsIgnoreCase(registrationId)) {
+                    OAuth2Error error = new OAuth2Error("invalid_request",
+                            "Đã tồn tại tài khoản với Email này" + email, null);
+                    throw new OAuth2AuthenticationException(error);
+                }
             }
         }
 

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import vn.minhduc.laptopshop.service.CustomOAuth2UserService;
@@ -45,6 +46,11 @@ public class SecurityConfiguration {
     }
 
     @Bean
+    public AuthenticationFailureHandler customFailureHandler() {
+        return new CustomOAuth2FailureHandler();
+    }
+
+    @Bean
     public SpringSessionRememberMeServices rememberMeServices() {
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
         rememberMeServices.setAlwaysRemember(true);
@@ -69,7 +75,7 @@ public class SecurityConfiguration {
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
                         .successHandler(customSuccessHandler())
-                        .failureUrl("/login?error")
+                        .failureHandler(customFailureHandler())
                         .userInfoEndpoint(user -> user
                                 .userService(new CustomOAuth2UserService(userService))))
                 .sessionManagement((sessionManagement) -> sessionManagement

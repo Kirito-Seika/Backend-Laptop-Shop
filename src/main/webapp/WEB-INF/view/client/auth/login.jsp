@@ -30,7 +30,7 @@
                                 <form method="post" action="/login">
                                     <c:if test="${param.error != null}">
                                         <div class="my-2" style="color: red;">
-                                            Thông tin người dùng không chính xác.
+                                                ${param.error = "" ? "Thông tin tài khoản không chính xác" : param.error}
                                         </div>
                                     </c:if>
                                     <c:if test="${param.logout != null}">
